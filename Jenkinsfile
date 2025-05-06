@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'pip install --user -r requirements.txt'
             }
         }
         stage('Run Test') {
@@ -39,8 +39,8 @@ pipeline {
                     httpMode: 'POST',
                     contentType: 'APPLICATION_JSON',
                     requestBody: groovy.json.JsonOutput.toJson(payload),
-                    url: 'https://discord.com/api/webhooks/1369305286233428159/PiEi9d5v7pBDiWq9C4PbfmaXeLbLINyDXr9fLZd0RMr3DoI02frPhTLxlVS0hPSeN9G2',
-                    validResponseCodes: '200'
+                    url: 'https://discord.com/api/webhooks/...',
+                    validResponseCodes: '200:204'
                 )
             }
         }
@@ -53,8 +53,8 @@ pipeline {
                     httpMode: 'POST',
                     contentType: 'APPLICATION_JSON',
                     requestBody: groovy.json.JsonOutput.toJson(payload),
-                    url: 'https://discord.com/api/webhooks/1369305286233428159/PiEi9d5v7pBDiWq9C4PbfmaXeLbLINyDXr9fLZd0RMr3DoI02frPhTLxlVS0hPSeN9G2',
-                    validResponseCodes: '200'
+                    url: 'https://discord.com/api/webhooks/...',
+                    validResponseCodes: '200:204'
                 )
             }
         }
