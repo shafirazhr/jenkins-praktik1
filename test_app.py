@@ -5,4 +5,3 @@ def test_hello():
     response = client.get('/')
     assert response.status.code == 200
     assert b"Hello from Jenkins MUltibranch Pipeline!" in response.data
-    
