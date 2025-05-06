@@ -1,6 +1,9 @@
 pipeline {
-    agent any
-
+    agent {
+        docker {
+            image 'python:3.10'
+        }
+    }         
     stages {
         stage('Install Dependencies') {
             steps {
@@ -24,7 +27,6 @@ pipeline {
             }
         }
     }
-
     post {
         success {
             script {
@@ -35,8 +37,7 @@ pipeline {
                     httpMode: 'POST',
                     contentType: 'APPLICATION_JSON',
                     requestBody: groovy.json.JsonOutput.toJson(payload),
-                    url: 'https://discord.com/api/webhooks/1369305286233428159/PiEi9d5v7pBDiWq9C4PbfmaXeLbLINyDXr9fLZd0RMr3DoI02frPhTLxlVS0hPSeN9G2',
-                    validResponseCodes: '200'
+                    url: 'https://discord.com/api/webhooks/1369305286233428159/PiEi9d5v7pBDiWq9C4PbfmaXeLbLINyDXr9fLZd0RMr3DoI02frPhTLxlVS0hPSeN9G2'
                 )
             }
         }
@@ -45,13 +46,12 @@ pipeline {
                 def payload = [
                     content: "❌ Build FAILED on `${env.BRANCH_NAME}`\nURL: ${env.BUILD_URL}"
                 ]
-                httpRequest(
+                httpRequest{
                     httpMode: 'POST',
                     contentType: 'APPLICATION_JSON',
                     requestBody: groovy.json.JsonOutput.toJson(payload),
-                    url: 'https://discord.com/api/webhooks/1369305286233428159/PiEi9d5v7pBDiWq9C4PbfmaXeLbLINyDXr9fLZd0RMr3DoI02frPhTLxlVS0hPSeN9G2',
-                    validResponseCodes: '200'
-                )
+                    url: 'https://discord.com/api/webhooks/1369305286233428159/PiEi9d5v7pBDiWq9C4PbfmaXeLbLINyDXr9fLZd0RMr3DoI02frPhTLxlVS0hPSeN9G2'
+                }
             }
         }
     }
